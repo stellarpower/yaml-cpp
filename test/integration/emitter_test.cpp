@@ -91,6 +91,20 @@ TEST_F(EmitterTest, AliasScalar) {
   ExpectEmit("[&1 str, *1]");
 }
 
+
+// To support 1.2 spec, alternatives to true/false have been removed.
+// This prevents some situations where values intended as strings are instead parsed as bools, in particular annoying when reading from JSON and this is not expected.
+TEST_F(EmitterTest, BooleansPer1_2Spec) {
+  const char *document = 
+    "yesNo: y\n"
+    "onOff: on"
+  ;
+  Node n(Load(document));
+  out << n;
+  ExpectEmit(document); // Should round-trip without co-ercing to a bool.
+}
+
+
 TEST_F(EmitterTest, StringFormat) {
   out << BeginSeq;
   out.SetStringFormat(SingleQuoted);
