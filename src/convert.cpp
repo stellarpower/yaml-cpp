@@ -48,10 +48,10 @@ bool convert<bool>::decode(const Node& node, bool& rhs) {
   static const struct {
     std::string truename, falsename;
   } names[] = {
-      {"y", "n"},
-      {"yes", "no"},
+      //{"y", "n"},
+      //{"yes", "no"},
       {"true", "false"},
-      {"on", "off"},
+      //{"on", "off"},
   };
 
   if (!IsFlexibleCase(node.Scalar()))
